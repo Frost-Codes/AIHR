@@ -1,0 +1,121 @@
+{% extends 'app/index.html' %}
+
+{% load static %}
+
+{% block title %} Edit Job {% endblock title %}
+
+{% block body %}
+
+<div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <i class="mdi mdi-playlist-plus"></i>
+      </span>Edit Job
+    </h3>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Human Resource</a></li>
+          <li class="breadcrumb-item active" aria-current="page"> Edit Job</li>
+        </ol>
+      </nav>
+
+
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Edit Job</h4>
+
+                <form class="forms-sample" method="post">
+
+                    {% csrf_token %}
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Recruiting</label>
+                        <div class="col-sm-4">
+                          <div class="form-check form-check-success">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="recruiting" id="active" value="True" checked> Active</label>
+                          </div>
+                        </div>
+                        <div class="col-sm-5">
+                          <div class="form-check form-check-danger">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="recruiting" id="expired" value="False">Expired</label>
+                          </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="exampleInputName1">Job Title</label>
+                        <input type="text" class="form-control" name="jobTitle" placeholder="Job" value="{{ job.job_title }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Depertment</label>
+                        <select class="js-example-basic-single" style="width: 100%;" name="department">
+                            <option value="HR" {% if job.department == 'HR' %} selected {% endif %}>Human Resource</option>
+                            <option value="IT" {% if job.department == 'IT' %} selected {% endif %}>Information Technology</option> 
+                            <option value="Marketing" {% if job.department == 'Marketing' %} selected {% endif %}>Marketing</option>
+                            <option value="Finance"{% if job.department == 'Finance' %} selected {% endif %}>Finance</option>
+                            <option value="R&D" {% if job.department == 'R&D' %} selected {% endif %}>Research and Development</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputCity1">Salary ($)</label>
+                        <input type="number" class="form-control" name="salary" placeholder="Salary" value="{{ job.salary }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Location</label>
+                        <select class="js-example-basic-single" style="width: 100%;" name="location">
+                            <option value="Nairobi, Kenya" {% if job.location == 'Nairobi, Kenya' %} selected {% endif %}>Nairobi, Kenya</option>
+                            <option value="California, US" {% if job.location == 'California, US' %} selected {% endif %}>California, US</option>
+                            <option value="London, UK" {% if job.location == 'London, UK' %} selected {% endif %}>London, UK</option>
+                            <option value="San fransisco, US" {% if job.location == 'San fransisco, US' %} selected {% endif %}>San fransisco, US</option>
+                            <option value="Cape Town, SA" {% if job.location == 'Cape Town, SA' %} selected {% endif %}>Cape Town, SA</option>
+                            
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Introduction</label>
+                        <textarea class="form-control" name="introduction" rows="3">{{ job.introduction }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Brief Posting Description</label>
+                        <textarea class="form-control" name="description" rows="3">{{ job.brief_posting_description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Responsibilities</label>
+                        <textarea class="form-control" name="responsibilities" rows="12">{{ job.responsibilities }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Qualifications</label>
+                        <textarea class="form-control" name="qualifications" rows="8">{{ job.qualifications }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Edit Job</button>
+
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

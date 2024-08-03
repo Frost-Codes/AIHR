@@ -1,0 +1,83 @@
+{% extends 'app/index.html' %}
+
+{% load static %}
+
+{% block title %} Shortlist {% endblock title %}
+
+{% block body %}
+
+<div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <i class="mdi mdi-list-status"></i>
+      </span> {{ job.job_title}} ({{ shortlisted }})
+    </h3>
+    <nav aria-label="breadcrumb">
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Human Resource</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'shortlist-candidates' job.id %}">Shortlist Candidates</a></li>
+
+      </ol>
+
+    </nav>
+</div>
+
+{% if short_list %}
+
+{% for applicant in short_list %}
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+            <div class="row">
+              
+                <div class="d-flex flex-row">
+                    <h4 class="card-title"><i class="mdi mdi-check-all text-success" style="font-size: 23px;"></i>
+                       {{ applicant.applicant.first_name }} {{ applicant.applicant.last_name}}</h4>
+                    <h6 style="margin: 8px;"><i class="mdi mdi-map-marker-outline"></i>{{ applicant.applicant.location }}</h6> 
+                    <small class="text-muted" style="margin: 8px;"><i class="mdi mdi-scale-balance"></i> Score: {{ applicant.score }}</small>
+                    <a href="{{ applicant.applicant.cv.url }}" class="btn btn-link btn-sm"> View CV</a>
+                    
+                </div>
+                
+            </div>
+
+            <div class="row">
+
+
+              <div class="col-md-12 stretch-card grid-margin">
+                <a class="btn" style="padding: 0px !important;" href="#">
+                <div class="card"  style="border-left: 5px solid pink; margin-top: 4px;">
+                  <div class="card-body" style="padding: 1px;">
+                    <h6 class="text-muted">{{ applicant.summary }}</h6>
+                          
+                        
+                  </div>
+                </div>
+              </a>
+              </div>
+              
+
+            </div>
+
+            
+        
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+{% endif %}
+
+
+{% endblock %}

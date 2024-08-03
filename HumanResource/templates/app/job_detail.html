@@ -1,0 +1,75 @@
+{% extends 'app/careers_index.html' %}
+
+{% load static %}
+
+{% block title %} Job Detail {% endblock title %}
+
+{% block body %}
+
+
+{% if job %}
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-0">{{ job.job_title }}</h6> <span>{{ job.location }}</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'apply-job' job.id %}" style="text-decoration: none;"><div class="badge"> <span>Apply</span> </div></a>
+                </div>
+
+                <div class="mt-2">
+                    <span class="text-muted">{{ job.date_posted}}</span>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="mb-0">Introduction</h5>
+                    <div class="mt-2">
+                        <p> {{ job.introduction }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="mb-0">Description</h5>
+                    <div class="mt-2">
+                        <p> {{ job.description }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="mb-0">Responsibilities</h5>
+                    <div class="mt-2">
+                        <p> {{ job.responsibilities }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="mb-0">Qualifications</h5>
+                    <div class="mt-2">
+                        <p> {{ job.qualifications }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% else %}
+
+<h4 class="mb-0">No Job has been found</h4>
+
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'app/careers_index.html' %}
+
+{% load static %}
+
+{% block title %} Apply Job {% endblock title %}
+
+
+{% block body %}
+
+<div class="container mt-5 mb-3">
+    <div class="row  mx-0 justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card p-3 mb-2">
+
+                <h4 class="mb-2">Application Form for {{ job.job_title}}</h4>
+
+                            {% if messages %}
+                            {% for msg in messages %}
+                        
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" 
+                            style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                                {{ msg }} 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+
+                        
+                            {% endfor %}
+                            {% endif %}
+
+                <form method="POST" class="w-100 rounded-1 p-4 border bg-white" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    <label class="d-block mb-4">
+                        <span class="form-label d-block">First name</span>
+                        <input required name="first_name" type="text" class="form-control" placeholder="Joe" />
+                    </label>
+
+                    <label class="d-block mb-4">
+                        <span class="form-label d-block">Last name</span>
+                        <input required name="last_name" type="text" class="form-control" placeholder="Bloggs" />
+                    </label>
+
+                    <label class="d-block mb-4">
+                        <span class="form-label d-block">Email address</span>
+                        <input required name="email" type="email" class="form-control"
+                            placeholder="joe.bloggs@example.com" />
+                    </label>
+
+                    <div class="mb-4">
+                        <div>
+                            <div class="form-check">
+                                <label class="d-block">
+                                    <input type="radio" class="form-check-input" name="gender" value="Male" checked />
+                                    <span class="form-check-label">Male</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-check">
+                                <input type="radio" class="form-check-input" name="gender" value="Female" />
+                                <span class="form-check-label">Female</span>
+                            </label>
+                        </div>
+                        <div>
+                            <div class="form-check">
+                                <label class="d-block">
+                                    <input type="radio" class="form-check-input" name="gender" value="Prefer not to say"/>
+                                    <span class="form-check-label">Prefer not to say</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="d-block mb-4">
+                        <span class="form-label d-block">Location</span>
+                        <select required name="location" class="form-select">
+                            <option>Nairobi, Kenya</option>
+                            <option>California, US</option>
+                            <option>London, UK</option>
+                            <option>San fransisco, US</option>
+                            <option>Cape Town, SA</option>
+                        </select>
+                    </label>
+
+
+                    <label class="d-block mb-4">
+                        <span class="form-label d-block">Your CV</span>
+                        <input required name="cv" type="file" class="form-control" />
+                    </label>
+
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary px-3 rounded-3">
+                            Apply
+                        </button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock body %}

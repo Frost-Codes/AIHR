@@ -1,0 +1,163 @@
+{% extends 'app/index.html' %}
+
+{% load static %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block body %}
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span> Vacancies ({{ total_jobs }})
+    </h3>
+
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page">
+                <a class="btn btn-gradient-primary btn-md" href="{% url 'new-job' %}">New Job</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{% if job_data %}
+
+{% for job_id, data in job_data.items %}
+
+
+<div class="row" style="margin-top: 12px;">
+        <div class="col-12 grid margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="d-flex flex-row">
+                        <h4 class="card-title"> <i class="mdi mdi-checkbox-marked-outline text-success" style="font-size: 23px;"></i>{{ data.job.job_title }}</h4>
+                        <h6 style="margin: 8px;"><i class="mdi mdi-map-marker-outline"></i>{{ data.job.location }}</h6>
+                        <small class="text-muted" style="margin: 8px;"><i class="mdi mdi-cash-multiple"></i>$ {{ data.lower_bound }} - $ {{ data.upper_bound}} per Annum</small>
+
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <a class="btn" href="{% url 'shortlist' data.job.id %}" style="padding: 0px !important;">
+                            <div class="card" style="border-left: 5px solid pink; margin-top: 10px;">
+                                <div class="card-body" style="padding: 15px;">
+                                    <h3>
+                                        <i class="mdi mdi-account-multiple-outline" style="color: pink;"></i>
+                                        {{ data.shortlisted }}
+                                    </h3>
+                                    <div class="metric-value d-inline-block">
+                                        <h6 class="mb-1">SHORTLISTED</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <a class="btn" href="#" style="padding: 0px !important;">
+                            <div class="card" style="border-left: 5px solid rgb(255, 234, 0); margin-top: 10px;">
+                                <div class="card-body" style="padding: 15px;">
+                                    <h3>
+                                        <i class="mdi mdi-account-multiple-outline" style="color: rgb(255, 234, 0);"></i>
+                                        24
+                                    </h3>
+                                    <div class="metric-value d-inline-block">
+                                        <h6 class="mb-1">IN PROGRESSION</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <a class="btn" href="#" style="padding: 0px !important;">
+                            <div class="card" style="border-left: 5px solid rgb(0, 255, 234); margin-top: 10px;">
+                                <div class="card-body" style="padding: 15px;">
+                                    <h3>
+                                        <i class="mdi mdi-account-multiple-outline" style="color: rgb(0, 255, 234);"></i>
+                                        24
+                                    </h3>
+                                    <div class="metric-value d-inline-block">
+                                        <h6 class="mb-1">OFFERED</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 stretch-card grid-margin">
+                        <a class="btn" href="#" style="padding: 0px !important;">
+                            <div class="card" style="border-left: 5px solid rgb(0, 255, 55); margin-top: 10px;">
+                                <div class="card-body" style="padding: 15px;">
+                                    <h3>
+                                        <i class="mdi mdi-account-multiple-outline" style="color: rgb(0, 255, 55);"></i>
+                                        24
+                                    </h3>
+                                    <div class="metric-value d-inline-block">
+                                        <h6 class="mb-1">HIRED</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                </div>
+
+                <div class="row">
+                    <div class="stretch-card" style="margin-top: -20px;">
+
+                        {% if data.job.is_active %}
+                        <a class="btn btn-inverse-success btn-rounded btn-md"
+                        style="height: 24px !important; padding: 5px !important; width: 100px !important; font-size: 12px;" href="{% url 'edit-job' data.job.id %}">Active</a>
+
+                        {% else %}
+
+                        <a class="btn btn-inverse-danger btn-rounded btn-md"
+                        style="height: 24px !important; padding: 5px !important; width: 100px !important; font-size: 12px;" href="{% url 'edit-job' data.job.id %}">Expired</a>
+
+                        {%  endif %}
+
+                        {% if data.posted > 0 %}
+
+                        <p class="text-success" style="margin-left: 10px;">Posted {{ data.posted }} days Ago</p>
+
+                        {% else %}
+                        <p class="text-success" style="margin-left: 10px;">Posted today</p>
+
+                        {% endif %}
+
+
+                        <p class="text-muted" style="margin-left: 20px;">Ref: <span class="card-title">{{ data.job.id }}</span></p>
+
+                        <h6 class="text-muted" style="margin-left: 30px;">{{ data.job.department }} Dept</h6>
+
+                        <h6 class="text-muted" style="margin-left: 20px;"><i class="mdi mdi-account"></i> {{ data.applicants }} Applicants</h6>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="row">
+    <h4 class="card-title">No jobs are available</h4>
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock %}

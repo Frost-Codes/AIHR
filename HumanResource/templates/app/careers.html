@@ -1,0 +1,55 @@
+{% extends 'app/careers_index.html' %}
+
+{% load static %}
+
+{% block title %} Careers {% endblock title %}
+
+{% block body %}
+
+<div class="container mt-5 mb-3">
+    <div class="row">
+
+        {% if jobs %}
+
+        {% for job in jobs %}
+
+
+        <div class="col-md-4">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-0">{{ job.job_title}}</h6> <span>{{ job.location }}</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'job-detail' job.id %}" style="text-decoration: none;"><div class="badge"> <span>Apply</span> </div></a>
+                </div>
+
+                <div class="mt-2">
+                    <span class="text-muted">{{ job.date_posted}}</span>
+                </div>
+
+                <div class="mt-2">
+                    <div class="mt-2">
+                        <p> {{ job.brief_posting_description }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        {% endfor %}
+
+        {% else %}
+
+        <h4 class="mb-0">No vacancies available</h4>
+
+        {% endif %}
+
+    
+    </div>
+</div>
+
+{% endblock %}

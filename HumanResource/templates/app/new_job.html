@@ -1,0 +1,103 @@
+{% extends 'app/index.html' %}
+
+{% load static %}
+
+{% block title %} New Job {% endblock title %}
+
+{% block body %}
+
+<div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <i class="mdi mdi-playlist-plus"></i>
+      </span> Create New Job
+    </h3>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Human Resource</a></li>
+          <li class="breadcrumb-item active" aria-current="page"> New Job</li>
+        </ol>
+      </nav>
+
+
+</div>
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create New Job</h4>
+
+                <form class="forms-sample" method="post">
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="exampleInputName1">Job Title</label>
+                        <input type="text" class="form-control" name="jobTitle" placeholder="Job" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Depertment</label>
+                        <select class="js-example-basic-single" style="width: 100%;" name="department">
+                            <option value="HR">Human Resource</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="R&D">Research and Development</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputCity1">Salary ($)</label>
+                        <input type="number" class="form-control" name="salary" placeholder="Salary" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Location</label>
+                        <select class="js-example-basic-single" style="width: 100%;" name="location">
+                            <option value="Nairobi, Kenya">Nairobi, Kenya</option>
+                            <option value="California, US">California, US</option>
+                            <option value="London, UK">London, UK</option>
+                            <option value="San fransisco, US">San fransisco, US</option>
+                            <option value="Cape Town, SA">Cape Town, SA</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Introduction</label>
+                        <textarea class="form-control" name="introduction" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Brief Posting Description</label>
+                        <textarea class="form-control" name="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Responsibilities</label>
+                        <textarea class="form-control" name="responsibilities" rows="12"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Qualifications</label>
+                        <textarea class="form-control" name="qualifications" rows="8"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Add Job</button>
+
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
